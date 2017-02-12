@@ -7,10 +7,10 @@
 	   "schema":"tran",
 	   "tableName":"ot",
 	   "indice":{"name":"id_ot", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
-	   "unique":"id_rg",
+	   "unique":"id_ot",
 	   "columnas": [
-	     	{ "name":"nombreEmpresa", "tipo":"int", "alias":"empresa","sqlType":"varchar(50)"},
-	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)"}       
+	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
+	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"} 
 		]		
 	},
 		{
@@ -22,8 +22,8 @@
 	   "indice":{"name":"id_rg", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "unique":"id_rg",
 	   "columnas": [
-	     	{ "name":"nombreEmpresa", "tipo":"int", "alias":"empresa","sqlType":"varchar(50)"},
-	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)"}       
+	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
+	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
 		]		
 	},
 	{
@@ -33,10 +33,36 @@
 	   "schema":"tran",
 	   "tableName":"vj",
 	   "indice":{"name":"id_vj", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
-	   "unique":"id_rg",
+	   "unique":"id_vj",
 	   "columnas": [
-	     	{ "name":"nombreEmpresa", "tipo":"int", "alias":"empresa","sqlType":"varchar(50)"},
-	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)"}       
+	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
+	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
+		]		
+	},
+	{
+	   "titulo": "Trabajadores",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"tb",
+	   "indice":{"name":"id_tb", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
+	   "unique":"id_tb",
+	   "columnas": [
+	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
+	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
+		]		
+	},
+	{
+	   "titulo": "Camiones",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"cm",
+	   "indice":{"name":"id_cm", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
+	   "unique":"id_cm",
+	   "columnas": [
+	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
+	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
 		]		
 	}
 	

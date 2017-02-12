@@ -32,6 +32,10 @@ function ${schema}_${tableName}_update() {
     }
     ?>
     <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/${plugin}/style-admin.css" rel="stylesheet" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <div class="wrap">
         <h2>${titulo}</h2>
 
@@ -46,9 +50,9 @@ function ${schema}_${tableName}_update() {
         <?php } else { ?>
             <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
                 <table class='wp-list-table widefat fixed'>
-                    <tr><th>${indice.alias}</th><td><input type="text" name="${indice.name}" value="<?php echo $${indice.name}; ?>"/></td></tr>
+                    <tr><th>${indice.alias}</th><td><input type="text" name="${indice.name}" value="<?php echo $${indice.name}; ?>" disabled /></td></tr>
                     <#list columnas as col>
-					<tr><th>${col.alias}</th><td><input type="text" name="${col.name}" value="<?php echo $${col.name}; ?>"/></td></tr>
+					<tr><th>${col.alias}</th><td><input type="text" name="${col.name}" value="<?php echo $${col.name}; ?>" class="${col.clase}"/></td></tr>
 					</#list>
 					
                 </table>
@@ -56,7 +60,12 @@ function ${schema}_${tableName}_update() {
                 <input type='submit' name="delete" value='Delete' class='button' onclick="return confirm('&iquest;Est&aacute;s seguro de borrar este elemento?')">
             </form>
         <?php } ?>
-			<a href="<?php echo admin_url('admin.php?page=tran_ot_list') ?>">&laquo; Volver</a>
+			<a href="<?php echo admin_url('admin.php?page=${schema}_${tableName}_list') ?>">&laquo; Volver</a>
+			
     </div>
+    <script>
+		$( ".datetime" ).datepicker();
+		$( ".datetime" ).onclick(function(){$(this).datepicker('show')});
+	</script>
     <?php
 }
