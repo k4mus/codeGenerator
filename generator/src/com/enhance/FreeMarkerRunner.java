@@ -40,34 +40,46 @@ public class FreeMarkerRunner{
 			if (args.length<3) {
 				System.out.println("Sin argumentos"); return; 
 			}
-			String templateName = args[0];
-			String modelName =  args[1];
-			String outputPath = args[2]; 
-			
-			System.out.println("Argumentos: plantilla, modelo, output");
-			System.out.println("Argumentos: "+templateName+","+modelName+","+outputPath);
-			if (templateName.isEmpty() || modelName.isEmpty() || outputPath.isEmpty())
+			String pahtFTL = args[0];
+			String templateName = args[1];
+			String modelName =  args[2];
+			String tipo= args[3];
+			String outputPath;
+			System.out.println("Argumentos: rutaFTL, plantilla, modelo, tipo");
+			System.out.println("Argumentos: "+pahtFTL+","+templateName+","+modelName+","+tipo);
+			if (pahtFTL.isEmpty() || templateName.isEmpty() || modelName.isEmpty() || tipo.isEmpty()){
+				System.out.println("faltan argumentos");
 				return;
+			}
 			
-			Template template = cfg.getTemplate(templateName);
+			Template template = cfg.getTemplate(pahtFTL+"/"+templateName);
 			//Load Model on Jason
-			Object obj = parser.parse(new FileReader("model"));
-            JSONObject jsonObject = (JSONObject) obj;
-            //parse model to Map
-            Map demo = jsonToMap(jsonObject);
-            
-            outputPath= demo.get("plugin")+"_"+demo.get("tableName")+".php";
-            
-            System.out.println(demo.toString());
-            
-            // File output
-			Writer file = new FileWriter(new File(outputPath));
+			JSONObject obj = (JSONObject) parser.parse(new FileReader(modelName));
+			ArrayList jsonMapTablas= (ArrayList) jsonToMap(obj).get("tablas");
 			
-			//Freemarker union model-template
-			template.process(demo, file);
-			file.flush();
-			file.close();
+			for (int i =0; i<jsonMapTablas.size();i++){
+				Map demo = (Map) jsonMapTablas.get(i);
+				String dirPath= demo.get("schema").toString()+"\\"+demo.get("tableName").toString();
+				File dir = new File(dirPath);
+			    if (!dir.exists())dir.mkdirs();
+			    
+				outputPath= dirPath+"/"+demo.get("schema")+"_"+demo.get("tableName")+"_"+tipo;
+	            
+	            // File output
+				Writer file = new FileWriter(new File(outputPath));
+				//Freemarker union model-template
+				template.process(demo, file);
+				file.flush();
+				file.close();
+				System.out.println("Codigo creado: "+ outputPath);
+				
 
+			}
+			
+//			JSONObject jsonObject = (JSONObject) obj;
+            //parse model to Map
+//            Map demo = jsonToMap(jsonObject);
+            
 		} catch (Exception e) {
 			e.printStackTrace();
 		} 

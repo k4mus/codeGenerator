@@ -1,9 +1,9 @@
 <?php
 
-function ${plugin}_${table}_update() {
+function ${schema}_${tableName}_update() {
     global $wpdb;
-    $table_name = $wpdb->prefix . "${tableName}";
-    $${indice} = $_GET["${indice}"];
+    $table_name = $wpdb->prefix ."${tableName}";
+    $${indice.name} = $_GET["${indice.name}"];
 	<#list columnas as col>
 	$${col.name} = $_POST["${col.name}"];
 	</#list>
@@ -13,17 +13,18 @@ function ${plugin}_${table}_update() {
         $wpdb->update(
                 $table_name, //table
 				array(<#list columnas as col> '${col.name}' => $${col.name}<#if col_has_next>,</#if></#list>), //data
-                array('${indice}' => $${indice}), //where
+                array('${indice.name}' => $${indice.name}), //where
 				array(<#list columnas as col>'%s'<#if col_has_next>,</#if></#list>), //data format
                 array('%s') //where format
         );
     }
 //delete
     else if (isset($_POST['delete'])) {
-        $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE ${indice} = %s", $${indice}));
+        $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE ${indice.name} = %s", $${indice.name}));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT ${indice},<#list columnas as col> ${col.name} <#if col_has_next>,</#if></#list> from $table_name where ${indice}=%s", $${indice}));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT ${indice.name},<#list columnas as col> ${col.name} <#if col_has_next>,</#if></#list> from $table_name where ${indice.name}=%s", $${indice.name}));
         foreach ($results as $r) {
+            $${indice.name} = $r->${indice.name};
             <#list columnas as col> 
 			$${col.name} = $r->${col.name};
 			</#list>			
@@ -36,15 +37,16 @@ function ${plugin}_${table}_update() {
 
         <?php if ($_POST['delete']) { ?>
             <div class="updated"><p>${titulo} deleted</p></div>
-            <a href="<?php echo admin_url('admin.php?page=${plugin}_${table}_list') ?>">&laquo; Volver</a>
+            
 
         <?php } else if ($_POST['update']) { ?>
             <div class="updated"><p>${titulo} updated</p></div>
-            <a href="<?php echo admin_url('admin.php?page=${plugin}_${table}_list') ?>">&laquo; Volver</a>
+            
 
         <?php } else { ?>
             <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
                 <table class='wp-list-table widefat fixed'>
+                    <tr><th>${indice.alias}</th><td><input type="text" name="${indice.name}" value="<?php echo $${indice.name}; ?>"/></td></tr>
                     <#list columnas as col>
 					<tr><th>${col.alias}</th><td><input type="text" name="${col.name}" value="<?php echo $${col.name}; ?>"/></td></tr>
 					</#list>
@@ -54,7 +56,7 @@ function ${plugin}_${table}_update() {
                 <input type='submit' name="delete" value='Delete' class='button' onclick="return confirm('&iquest;Est&aacute;s seguro de borrar este elemento?')">
             </form>
         <?php } ?>
-
+			<a href="<?php echo admin_url('admin.php?page=tran_ot_list') ?>">&laquo; Volver</a>
     </div>
     <?php
 }

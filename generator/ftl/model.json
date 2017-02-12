@@ -1,13 +1,44 @@
 {
-   "titulo": "Orden de Transporte",
-   "autor": "fmoreno",
-   "plugin"."tran",
-   "schema":"tran",
-   "tableName":"ot",
-   "indice":"id_ot";
-   "columnas": [
-        { "name":"id_ot", "tipo":"int", "alias":"ID"},
-		{ "name":"nombreEmpresa", "tipo":"int", "alias":"empresa"},
-        { "name":"fecha", "tipo":"datetime", "alias":"fecha"}       
-	]		
+"tablas":[
+	{
+	   "titulo": "Orden de Transporte",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"ot",
+	   "indice":{"name":"id_ot", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
+	   "unique":"id_rg",
+	   "columnas": [
+	     	{ "name":"nombreEmpresa", "tipo":"int", "alias":"empresa","sqlType":"varchar(50)"},
+	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)"}       
+		]		
+	},
+		{
+	   "titulo": "Registro de Gastos",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"rg",
+	   "indice":{"name":"id_rg", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
+	   "unique":"id_rg",
+	   "columnas": [
+	     	{ "name":"nombreEmpresa", "tipo":"int", "alias":"empresa","sqlType":"varchar(50)"},
+	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)"}       
+		]		
+	},
+	{
+	   "titulo": "Orden de Viaje",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"vj",
+	   "indice":{"name":"id_vj", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
+	   "unique":"id_rg",
+	   "columnas": [
+	     	{ "name":"nombreEmpresa", "tipo":"int", "alias":"empresa","sqlType":"varchar(50)"},
+	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)"}       
+		]		
+	}
+	
+]
 }
