@@ -32,7 +32,7 @@
 			{ "name":"documentos", "tipo":"string", "alias":"Documentos asociados","sqlType":"varchar(255)", "clase":""},
 			{ "name":"instrucciones", "tipo":"string", "alias":"Instrucciones","sqlType":"varchar(255)", "clase":""}
 			
-		]		
+		]
 	},
 		{
 	   "titulo": "Registro de Gastos",
@@ -58,6 +58,10 @@
 	   "columnas": [
 	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
+		],
+		"tabs":[
+			{"name":"otTab", "fun":"tran_otVj_list($id_vj);", "titulo":"Orden de Transporte" },
+			{"name":"otTab", "fun":"tran_ot_list($id_vj);", "titulo":"Orden de Transporte" }
 		]		
 	},
 	{
@@ -71,7 +75,7 @@
 	   "columnas": [
 	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
-		]		
+		]
 	},
 	{
 	   "titulo": "Vehiculos",
@@ -113,14 +117,14 @@
 		]		
 	},
 	{
-	   "titulo": "Dineros - Orden de Viaje",
+	   "titulo": "Orden de Viaje-Dineros",
 	   "autor": "fmoreno",
 	   "plugin":"transportes-plugin",
 	   "schema":"tran",
-	   "tableName":"dnOv",
-	   "indice":{"name":"id_dnOv", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
+	   "tableName":"vjDn",
+	   "indice":{"name":"id_vjDn", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "foraneas":[
-		   {"name":"id_ov", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_OV"},
+		   {"name":"id_vj", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_vj"},
 		   {"name":"id_dn", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_DN"}
 		],
 	   "unique":"id_dn",
@@ -136,13 +140,13 @@
 	   "autor": "fmoreno",
 	   "plugin":"transportes-plugin",
 	   "schema":"tran",
-	   "tableName":"OvTb",
-	   "indice":{"name":"id_ovTb", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
+	   "tableName":"vjTb",
+	   "indice":{"name":"id_vjTb", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "foraneas":[
-		   {"name":"id_ov", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_OV"},
+		   {"name":"id_vj", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_VJ"},
 		   {"name":"id_tb", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_TB"}
 		],
-	   "unique":"id_ovTb",
+	   "unique":"id_vjTb",
 	   "columnas": [
 	     	{ "name":"Monto", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 			{ "name":"Razon", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
@@ -155,13 +159,13 @@
 	   "autor": "fmoreno",
 	   "plugin":"transportes-plugin",
 	   "schema":"tran",
-	   "tableName":"OvVh",
+	   "tableName":"vjVh",
 	   "indice":{"name":"id_ovVh", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "foraneas":[
-		   {"name":"id_ov", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_OV"},
+		   {"name":"id_vj", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_VJ"},
 		   {"name":"id_vh", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_VH"}
 		],
-	   "unique":"id_ovTb",
+	   "unique":"id_ovVh",
 	   "columnas": [
 	     	{ "name":"Monto", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 			{ "name":"Razon", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
@@ -174,11 +178,11 @@
 	   "autor": "fmoreno",
 	   "plugin":"transportes-plugin",
 	   "schema":"tran",
-	   "tableName":"OvTb",
+	   "tableName":"vjTb",
 	   "indice":{"name":"id_ovTb", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "foraneas":[
-		   {"name":"id_ov", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_OV"},
-		   {"name":"id_tb", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_TB"}
+		   {"name":"id_vj", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_VJ","tabla":"vj"},
+		   {"name":"id_tb", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_TB","tabla":"tb"}
 		],
 	   "unique":"id_ovTb",
 	   "columnas": [
@@ -196,8 +200,8 @@
 	   "tableName":"OtRt",
 	   "indice":{"name":"id_otRt", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "foraneas":[
-		   {"name":"id_ot", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_OT"},
-		   {"name":"id_rt", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_RT"}
+		   {"name":"id_ot", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_OT", "tabla":"ot"},
+		   {"name":"id_rt", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_RT" "tabla":"rt"}
 		],
 	   "unique":"id_otRt",
 	   "columnas": [
