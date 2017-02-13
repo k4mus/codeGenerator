@@ -27,12 +27,13 @@ function ${schema}_${tableName}_list() {
             </tr>
             <?php foreach ($rows as $row) { ?>
                 <tr>
-                    <td class="manage-column ss-list-width"><?php echo $row->${indice.name}; ?></td>
+                    <td class="manage-column ss-list-width">
+						<a href="<?php echo admin_url('admin.php?page=${schema}_${tableName}_update&${indice.name}=' . $row->${indice.name}); ?>"><?php echo $row->${indice.name}; ?></a>
+					</td>
 					<#list columnas as col>
 					<td class="manage-column ss-list-width"><?php echo $row->${col.name}; ?></td>
 					</#list>
-			        <td><a href="<?php echo admin_url('admin.php?page=${schema}_${tableName}_update&${indice.name}=' . $row->${indice.name}); ?>">Update</a></td>
-                </tr>
+			    </tr>
             <?php } ?>
         </table>
     </div>

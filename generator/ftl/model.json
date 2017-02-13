@@ -9,8 +9,29 @@
 	   "indice":{"name":"id_ot", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "unique":"id_ot",
 	   "columnas": [
-	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
-	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"} 
+	     	{ "name":"NomEmpRet", "tipo":"string", "alias":"Nombre Empresa","sqlType":"varchar(50)", "clase":""},
+	        { "name":"telEmpRet", "tipo":"string", "alias":"Telefono","sqlType":"varchar(50)", "clase":""},
+			{ "name":"dirEmpRet", "tipo":"string", "alias":"Direccion","sqlType":"varchar(50)", "clase":""},
+			{ "name":"ciudEmpRet", "tipo":"string", "alias":"Ciudad","sqlType":"varchar(50)", "clase":""},
+			{ "name":"nomPerRet", "tipo":"string", "alias":"Entrega","sqlType":"varchar(50)", "clase":""},
+			{ "name":"fechaRet", "tipo":"datetime", "alias":"Fecha","sqlType":"varchar(50)", "clase":"datetime"},
+			{ "name":"NomEmpEnt", "tipo":"string", "alias":"Nombre Empresa","sqlType":"varchar(50)", "clase":""},
+	        { "name":"telEmpEnt", "tipo":"string", "alias":"Telefono","sqlType":"varchar(50)", "clase":""},
+			{ "name":"dirEmpEnt", "tipo":"string", "alias":"Direccion","sqlType":"varchar(50)", "clase":""},
+			{ "name":"ciudEmpEnt", "tipo":"string", "alias":"Ciudad","sqlType":"varchar(50)", "clase":""},
+			{ "name":"nomPerEnt", "tipo":"string", "alias":"Persona Entrega","sqlType":"varchar(50)", "clase":""},
+			{ "name":"fechaEnt", "tipo":"datetime", "alias":"Fecha Entrega","sqlType":"varchar(50)", "clase":"datetime"},
+			{ "name":"formaPago", "tipo":"string", "alias":"Forma de Pago","sqlType":"varchar(50)", "clase":""},
+			{ "name":"cuentaCte", "tipo":"string", "alias":"Cuenta Corriente","sqlType":"varchar(50)", "clase":""},
+			{ "name":"boletaFactura", "tipo":"string", "alias":"Boleta/Factura","sqlType":"varchar(50)", "clase":""},
+			{ "name":"nroPiezas", "tipo":"string", "alias":"N° de Piezas","sqlType":"varchar(50)", "clase":""},
+			{ "name":"pesoCarga", "tipo":"string", "alias":"Peso(Kg)","sqlType":"varchar(50)", "clase":""},
+			{ "name":"largoCarga", "tipo":"string", "alias":"Largo(m)","sqlType":"varchar(50)", "clase":""},
+			{ "name":"anchoCarga", "tipo":"string", "alias":"Ancho(m)","sqlType":"varchar(50)", "clase":""},
+			{ "name":"altoCarga", "tipo":"string", "alias":"Alto(m)","sqlType":"varchar(50)", "clase":""},
+			{ "name":"documentos", "tipo":"string", "alias":"Documentos asociados","sqlType":"varchar(255)", "clase":""},
+			{ "name":"instrucciones", "tipo":"string", "alias":"Instrucciones","sqlType":"varchar(255)", "clase":""}
+			
 		]		
 	},
 		{
@@ -53,13 +74,39 @@
 		]		
 	},
 	{
-	   "titulo": "Camiones",
+	   "titulo": "Vehiculos",
 	   "autor": "fmoreno",
 	   "plugin":"transportes-plugin",
 	   "schema":"tran",
-	   "tableName":"cm",
-	   "indice":{"name":"id_cm", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
-	   "unique":"id_cm",
+	   "tableName":"vh",
+	   "indice":{"name":"id_vh", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
+	   "unique":"id_vh",
+	   "columnas": [
+	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
+	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
+		]		
+	},
+	{
+	   "titulo": "Rutas",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"rt",
+	   "indice":{"name":"id_rt", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
+	   "unique":"id_rt",
+	   "columnas": [
+	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
+	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
+		]		
+	},
+	{
+	   "titulo": "Dineros",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"dn",
+	   "indice":{"name":"id_dn", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
+	   "unique":"id_dn",
 	   "columnas": [
 	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
