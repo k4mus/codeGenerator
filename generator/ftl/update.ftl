@@ -36,9 +36,10 @@ function ${schema}_${tableName}_update() {
     ?>
     <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/${plugin}/style-admin.css" rel="stylesheet" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/css/ui.jqgrid.min.css">
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/js/jquery.jqgrid.min.js"></script>
     <div class="wrap">
         <h2></h2>
 
@@ -61,7 +62,7 @@ function ${schema}_${tableName}_update() {
 		  </ul>
 		  <div id="tabs-1">
 			<form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
-                <table class='wp-list-table widefat fixed'>
+                <table class='wp-list-table widefat fixed' id="tabla">
                     <tr>
 						<th>${indice.alias}</th>
 						<td><input type="text" name="${indice.name}" value="<?php echo $${indice.name}; ?>" disabled /></td>
@@ -76,6 +77,7 @@ function ${schema}_${tableName}_update() {
 					<tr><th>${col.alias}</th><td><input type="text" name="${col.name}" value="<?php echo $${col.name}; ?>" class="${col.clase}"/></td></tr>
 					</#list>
                 </table>
+				<div id='pager'></div>
                 <input type='submit' name="update" value='Save' class='button'> &nbsp;&nbsp;
                 <input type='submit' name="delete" value='Delete' class='button' onclick="return confirm('&iquest;Est&aacute;s seguro de borrar este elemento?')">
             </form>
@@ -87,7 +89,6 @@ function ${schema}_${tableName}_update() {
 		</div>
 		<#assign icont = icont+1/> 
 		</#list>
-            
         <?php } ?>
 			<a href="<?php echo admin_url('admin.php?page=${schema}_${tableName}_list') ?>">&laquo; Volver</a>
 			
@@ -95,6 +96,7 @@ function ${schema}_${tableName}_update() {
     <script>
 		$( ".datetime" ).datepicker();
 		$( "#tabs" ).tabs();
+		
 	</script>
     <?php
 }
