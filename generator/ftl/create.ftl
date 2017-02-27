@@ -12,11 +12,8 @@ function ${schema}_${tableName}_create() {
 	<#list foraneas as for>
 	if($${for.name}) $page_volver= "${schema}_${for.table}_update&${for.name}=".$${for.name};
 	else
-	<#if !for_has_next>
-		$page_volver= "${schema}_${tableName}_list";
-	</#if>
 	</#list>
-	
+	$page_volver= "${schema}_${tableName}_list";
 	 //insert
     if (isset($_POST['insert'])) {
 		<#list foraneas as for>
@@ -60,7 +57,7 @@ function ${schema}_${tableName}_create() {
             </table>
             <input type='submit' name="insert" value='Save' class='button'>
         </form>
-		<a href="<?php echo admin_url('admin.php?page=${schema}_${tableName}_list') ?>">&laquo; Volver</a>
+		<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
     </div>
     <script>
 		$( ".datetime" ).datepicker();

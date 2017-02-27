@@ -14,10 +14,8 @@ function ${schema}_${tableName}_update() {
 	<#list foraneas as for>
 	if($${for.name}) $page_volver= "${schema}_${for.table}_update&${for.name}=".$${for.name};
 	else
-	<#if !for_has_next>
-		$page_volver= "${schema}_${tableName}_list";
-	</#if>
 	</#list>
+	$page_volver= "${schema}_${tableName}_list";
 	
 //update
     if (isset($_POST['update'])){
