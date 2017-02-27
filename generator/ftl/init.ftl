@@ -18,7 +18,10 @@ function ${tableName}_options_install() {
 	
 	CREATE TABLE $table_name (
             `${indice.name}` MEDIUMINT NOT NULL AUTO_INCREMENT,
-            <#list columnas as col>
+            <#list foraneas as for>
+			`${for.name}` MEDIUMINT NOT NULL,
+			</#list>
+			<#list columnas as col>
             	`${col.name}` ${col.sqlType} CHARACTER SET utf8 NOT NULL ,
             </#list>
             PRIMARY KEY (`${indice.name}`),

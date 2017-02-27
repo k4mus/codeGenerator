@@ -20,7 +20,8 @@ function ${schema}_${tableName}_update() {
 	</#list>
 	
 //update
-    if (isset($_POST['update'])) <#list foraneas as for>
+    if (isset($_POST['update'])){
+		<#list foraneas as for>
 		$${for.name}= $_POST["${for.name}"];
 		</#list>
 		
@@ -39,7 +40,10 @@ function ${schema}_${tableName}_update() {
         $results = $wpdb->get_results($wpdb->prepare("SELECT ${indice.name} <#list foraneas as for> ,'${for.name}' </#list>,<#list columnas as col> ${col.name} <#if col_has_next>,</#if></#list> from $table_name where ${indice.name}=%s", $${indice.name}));
         foreach ($results as $r) {
             $${indice.name} = $r->${indice.name};
-            <#list columnas as col> 
+            <#list foraneas as for> 
+			$${for.name} = $r->${for.name};
+			</#list>			
+			<#list columnas as col> 
 			$${col.name} = $r->${col.name};
 			</#list>			
         }
@@ -101,7 +105,7 @@ function ${schema}_${tableName}_update() {
 		<#assign icont = icont+1/> 
 		</#list>
         <?php } ?>
-			<a href="<?php echo admin_url('admin.php?page=${schema}_${tableName}_list') ?>">&laquo; Volver</a>
+			<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
 			
     </div>
     <script>
