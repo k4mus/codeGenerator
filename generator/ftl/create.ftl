@@ -47,7 +47,7 @@ function ${schema}_${tableName}_create() {
             <table class='wp-list-table widefat fixed'>
 				<#list foraneas as for>
 				<tr>
-                    <th class="ss-th-width">${for.name}</th>
+                    <th class="ss-th-width">${for.alias}</th>
                     <td><input type="text" name="${for.name}" value="<?php echo $${for.name}; ?>" <?php if ($${for.name}) echo readonly  ?> class="ss-field-width " /></td>
                 </tr>
 				</#list>
@@ -64,7 +64,6 @@ function ${schema}_${tableName}_create() {
     </div>
     <script>
 		$( ".datetime" ).datepicker();
-		$( ".datetime" ).onclick(function(){$(this).datepicker('show')});
 	</script>
     <?php
 }

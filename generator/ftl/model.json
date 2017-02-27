@@ -137,8 +137,8 @@
 	   "tableName":"vjDn",
 	   "indice":{"name":"id_vjDn", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "foraneas":[
-		   {"name":"id_vj", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_vj", "table"="vj"},
-		   {"name":"id_dn", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_DN", "table"="dn"}
+		   {"name":"id_vj", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_viaje", "table"="vj"},
+		   {"name":"id_dn", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_dinero", "table"="dn"}
 		],
 	   "unique":"id_vjDn",
 	   "columnas": [

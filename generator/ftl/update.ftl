@@ -10,13 +10,24 @@ function ${schema}_${tableName}_update() {
 	<#list columnas as col>
 	$${col.name} = $_POST["${col.name}"];
 	</#list>
+	//volver
+	<#list foraneas as for>
+	if($${for.name}) $page_volver= "${schema}_${for.table}_update&${for.name}=".$${for.name};
+	else
+	<#if !for_has_next>
+		$page_volver= "${schema}_${tableName}_list";
+	</#if>
+	</#list>
 	
 //update
-    if (isset($_POST['update'])) {
+    if (isset($_POST['update'])) <#list foraneas as for>
+		$${for.name}= $_POST["${for.name}"];
+		</#list>
+		
         $wpdb->update(
                 $table_name, //table
-				array(<#list columnas as col> '${col.name}' => $${col.name}<#if col_has_next>,</#if></#list>), //data
-                array('${indice.name}' => $${indice.name} <#list foraneas as for> ,'${for.name}' => $${for.name} </#list>), //where
+				array(<#list foraneas as for> '${for.name}' => $${for.name} ,</#list> <#list columnas as col> '${col.name}' => $${col.name}<#if col_has_next>,</#if></#list>), //data
+                array('${indice.name}' => $${indice.name} ), //where
 				array(<#list columnas as col>'%s'<#if col_has_next>,</#if></#list>), //data format
                 array('%s') //where format
         );
@@ -70,7 +81,7 @@ function ${schema}_${tableName}_update() {
 					<#list foraneas as for>
 					<tr>
 						<th>${for.alias}</th>
-						<td><input type="text" name="${for.name}" value="<?php echo $${for.name}; ?>" disabled /></td>
+						<td><input type="text" name="${for.name}" value="<?php echo $${for.name}; ?>"  <?php if ($${for.name}) echo readonly  ?> /></td>
 					</tr>
 					</#list>
                     <#list columnas as col>
