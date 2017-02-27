@@ -37,6 +37,9 @@ function ${schema}_${tableName}_list() {
             <?php } ?>
         </table>
     </div>
+	<script>
+	
+	</script>
 	
 	<?php
 	}

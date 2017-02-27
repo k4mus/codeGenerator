@@ -1,18 +1,34 @@
 <?php
 
 function ${schema}_${tableName}_create() {
-    <#list columnas as col>
+	<#list foraneas as for>    
+	$${for.name} = $_GET["${for.name}"];
+	</#list>
+	<#list columnas as col>
 	$${col.name} = $_POST["${col.name}"];
 	</#list>
 	
-    //insert
+	//volver
+	<#list foraneas as for>
+	if($${for.name}) $page_volver= "${schema}_${for.table}_update&${for.name}=".$${for.name};
+	else
+	<#if !for_has_next>
+		$page_volver= "${schema}_${tableName}_list";
+	</#if>
+	</#list>
+	
+	 //insert
     if (isset($_POST['insert'])) {
+		<#list foraneas as for>
+		$${for.name}= $_POST["${for.name}"];
+		</#list>
+		
         global $wpdb;
         $table_name = $wpdb->prefix ."${tableName}";
 
         $wpdb->insert(
                 $table_name, //table
-                array(<#list columnas as col> '${col.name}' => $${col.name} <#if col_has_next>,</#if></#list> ), //data
+                array(<#list foraneas as for>'${for.name}'=>$${for.name} ,</#list> <#list columnas as col> '${col.name}' => $${col.name} <#if col_has_next>,</#if></#list> ), //data
                 array('%s', '%s') //data format	 		
         );
         $message.="${titulo} inserted";
@@ -29,7 +45,13 @@ function ${schema}_${tableName}_create() {
         <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
             <p> </p>
             <table class='wp-list-table widefat fixed'>
-                <#list columnas as col>
+				<#list foraneas as for>
+				<tr>
+                    <th class="ss-th-width">${for.name}</th>
+                    <td><input type="text" name="${for.name}" value="<?php echo $${for.name}; ?>" <?php if ($${for.name}) echo readonly  ?> class="ss-field-width " /></td>
+                </tr>
+				</#list>
+				<#list columnas as col>
 				<tr>
                     <th class="ss-th-width">${col.alias}</th>
                     <td><input type="text" name="${col.name}" value="<?php echo $${col.name}; ?>" class="ss-field-width ${col.clase}" /></td>
