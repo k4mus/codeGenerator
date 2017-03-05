@@ -17,6 +17,15 @@ function ${schema}_${tableName}_update() {
 	</#list>
 	$page_volver= "${schema}_${tableName}_list";
 	
+	<#list columnas as col> 
+	<#switch col.clase>
+		<#case "combobox">
+	$rows_${col.table} = $wpdb->get_results("SELECT id_${col.table}, name_${col.table} from ".$wpdb->prefix ."${col.table}");  
+		 <#break>
+	  <#default>
+	</#switch>
+	</#list>
+	
 //update
     if (isset($_POST['update'])){
 		<#list foraneas as for>
@@ -53,6 +62,7 @@ function ${schema}_${tableName}_update() {
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/js/jquery.jqgrid.min.js"></script>
+	<script src="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/js/combobox.js"></script>
     <div class="wrap">
         <h2></h2>
 
@@ -86,8 +96,27 @@ function ${schema}_${tableName}_update() {
 						<td><input type="text" name="${for.name}" value="<?php echo $${for.name}; ?>"  <?php if ($${for.name}) echo readonly  ?> /></td>
 					</tr>
 					</#list>
-                    <#list columnas as col>
-					<tr><th>${col.alias}</th><td><input type="text" name="${col.name}" value="<?php echo $${col.name}; ?>" class="${col.clase}"/></td></tr>
+                    
+						<#case "combobox">
+					<td><select type="text" id= "${col.name}" name="${col.name}" value="<?php echo $${col.name}; ?>  " class="${col.clase}">
+						<option value="">Select one...</option>
+						<?php foreach ($rows_${col.table} as $row_${col.table}) { ?>
+						<option value="<?php echo $row_${col.table}->id_${col.table}; ?>"><?php echo $row_${col.table}->name_${col.table}; ?></option>
+						<?php } ?>
+						</select>
+					</td>
+						<#break>
+						<#case "radio">
+					<td>
+						<#list col.opcion as op>
+						<input type="radio" name="${col.name}" value="${op}" <?php if ($${col.name}=="${op}") echo 'checked' ?> />${op}
+						</#list>
+					</td>
+						<#break>
+						<#default>
+					<td><input type="text" name="${col.name}" value="<?php echo $${col.name}; ?>" class="ss-field-width ${col.clase}" /></td>
+					</#switch>
+					</tr>
 					</#list>
                 </table>
 				<div id='pager'></div>
@@ -109,6 +138,10 @@ function ${schema}_${tableName}_update() {
     <script>
 		$( ".datetime" ).datepicker();
 		$( "#tabs" ).tabs();
+		$('.combobox').each( function( index, element ){
+			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
+		});
+		$( ".int" ).spinner();
 		
 	</script>
     <?php

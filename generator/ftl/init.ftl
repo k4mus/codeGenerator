@@ -22,7 +22,22 @@ function ${tableName}_options_install() {
 			`${for.name}` MEDIUMINT NOT NULL,
 			</#list>
 			<#list columnas as col>
-            	`${col.name}` ${col.sqlType} CHARACTER SET utf8 NOT NULL ,
+            	<#switch col.clase>
+				<#case "datetime"> 
+				`${col.name}` varchar(11) CHARACTER SET utf8 NOT NULL ,
+				<#break>
+				<#case "int">
+				`${col.name}` MEDIUMINT,
+				<#break>
+				<#case "combobox">
+				`${col.name}` MEDIUMINT ,
+				<#break>
+				<#case "textarea"> 
+				`${col.name}` varchar(255) CHARACTER SET utf8,
+				<#break>
+				<#default>
+				`${col.name}` varchar(50) CHARACTER SET utf8,
+				</#switch> 
             </#list>
             PRIMARY KEY (`${indice.name}`),
             UNIQUE KEY `ix_` (`${unique}`)
