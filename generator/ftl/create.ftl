@@ -38,7 +38,8 @@ function ${schema}_${tableName}_create() {
                 array(<#list foraneas as for>'${for.name}'=>$${for.name} ,</#list> <#list columnas as col> '${col.name}' => $${col.name} <#if col_has_next>,</#if></#list> ), //data
                 array('%s', '%s') //data format	 		
         );
-        $message.="${titulo} inserted";
+        $id_${tableName} =$wpdb->insert_id;
+		$message.="${titulo} inserted: ".$id_${tableName};
     }
     ?>
     <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/${plugin}/style-admin.css" rel="stylesheet" />
@@ -49,7 +50,16 @@ function ${schema}_${tableName}_create() {
     
     <div class="wrap">
         <h2>Add New ${titulo}</h2>
-        <?php if (isset($message)): ?><div class="updated"><p><?php echo $message; ?></p></div><?php endif; ?>
+        <?php if (isset($message)): ?><div class="updated"><p><?php echo $message; ?></p></div><?php 
+		echo '<script type="text/javascript">
+           window.location = "'.admin_url('admin.php?page=${schema}_${tableName}_update&id_${tableName}='.$id_${tableName}).'"
+		</script>';
+		endif; ?>
+		<div id="tabs">
+		  <ul>
+			<li><a href="#tabs-1">Orden de Transporte</a></li>
+		  </ul>
+		<div id="tabs-1">
         <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
             <p> </p>
             <table class='wp-list-table widefat fixed'>
@@ -87,6 +97,8 @@ function ${schema}_${tableName}_create() {
             </table>
             <input type='submit' name="insert" value='Save' class='button'>
         </form>
+		</div>
+		</div>
 		<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
     </div>
 	<#assign icont = 2/> 
@@ -100,6 +112,7 @@ function ${schema}_${tableName}_create() {
     <script>
 		$( ".datetime" ).datepicker();
 		$( ".int" ).spinner();
+		$("#tabs" ).tabs();
 		
 	</script>
     <?php
