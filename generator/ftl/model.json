@@ -8,6 +8,7 @@
 	   "tableName":"ot",
 	   "indice":{"name":"id_ot", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "unique":"id_ot",
+	   "foraneas":[],
 	   "columnas": [
 	     	{ "name":"NomEmpRet", "tipo":"string", "alias":"Nombre Empresa","sqlType":"varchar(50)", "clase":""},
 	        { "name":"telEmpRet", "tipo":"string", "alias":"Telefono","sqlType":"varchar(50)", "clase":""},
@@ -32,7 +33,8 @@
 			{ "name":"documentos", "tipo":"string", "alias":"Documentos asociados","sqlType":"varchar(255)", "clase":""},
 			{ "name":"instrucciones", "tipo":"string", "alias":"Instrucciones","sqlType":"varchar(255)", "clase":""}
 			
-		]		
+		],
+		"tabs":[]
 	},
 		{
 	   "titulo": "Registro de Gastos",
@@ -42,23 +44,12 @@
 	   "tableName":"rg",
 	   "indice":{"name":"id_rg", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "unique":"id_rg",
+	   "foraneas":[],
 	   "columnas": [
 	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
-		]		
-	},
-	{
-	   "titulo": "Orden de Viaje",
-	   "autor": "fmoreno",
-	   "plugin":"transportes-plugin",
-	   "schema":"tran",
-	   "tableName":"vj",
-	   "indice":{"name":"id_vj", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
-	   "unique":"id_vj",
-	   "columnas": [
-	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
-	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
-		]		
+		],
+		"tabs":[]		
 	},
 	{
 	   "titulo": "Trabajadores",
@@ -68,10 +59,12 @@
 	   "tableName":"tb",
 	   "indice":{"name":"id_tb", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "unique":"id_tb",
+	   "foraneas":[],
 	   "columnas": [
 	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
-		]		
+		],
+		"tabs":[]
 	},
 	{
 	   "titulo": "Vehiculos",
@@ -81,10 +74,12 @@
 	   "tableName":"vh",
 	   "indice":{"name":"id_vh", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "unique":"id_vh",
+	   "foraneas":[],
 	   "columnas": [
 	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
-		]		
+		],
+		"tabs":[]		
 	},
 	{
 	   "titulo": "Rutas",
@@ -94,10 +89,12 @@
 	   "tableName":"rt",
 	   "indice":{"name":"id_rt", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "unique":"id_rt",
+	   "foraneas":[],
 	   "columnas": [
 	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
-		]		
+		],
+		"tabs":[]		
 	},
 	{
 	   "titulo": "Dineros",
@@ -107,105 +104,112 @@
 	   "tableName":"dn",
 	   "indice":{"name":"id_dn", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "unique":"id_dn",
+	   "foraneas":[],
 	   "columnas": [
 	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
-		]		
+		],
+		"tabs":[]		
 	},
 	{
-	   "titulo": "Dineros - Orden de Viaje",
+	   "titulo": "Orden de Viaje",
 	   "autor": "fmoreno",
 	   "plugin":"transportes-plugin",
 	   "schema":"tran",
-	   "tableName":"dnOv",
-	   "indice":{"name":"id_dnOv", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
-	   "foraneas":[
-		   {"name":"id_ov", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_OV"},
-		   {"name":"id_dn", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_DN"}
-		],
-	   "unique":"id_dn",
+	   "tableName":"vj",
+	   "indice":{"name":"id_vj", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
+	   "unique":"id_vj",
+	   "foraneas":[],
 	   "columnas": [
-	     	{ "name":"Monto", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
-			{ "name":"Razon", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
-			{ "name":"Gasto/ingreso", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
+	     	{ "name":"nombreEmpresa", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
+		],
+		"tabs":[
+			{"name":"dnTab", "fun":"tran_vjDn_list($id_vj)", "titulo":"Dineros" },
+			{"name":"tbTab", "fun":"tran_vjTb_list($id_vj)", "titulo":"Trabajadores" },
+			{"name":"vhTab", "fun":"tran_vjVh_list($id_vj)", "titulo":"Vehiculos" },
+			{"name":"otTab", "fun":"", "titulo":"Orden de Transporte" }
 		]		
 	},
 	{
-	   "titulo": "Orden de Viaje-Trabajadores",
+	   "titulo": "Orden de Viaje-Dineros",
 	   "autor": "fmoreno",
 	   "plugin":"transportes-plugin",
 	   "schema":"tran",
-	   "tableName":"OvTb",
-	   "indice":{"name":"id_ovTb", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
+	   "tableName":"vjDn",
+	   "indice":{"name":"id_vjDn", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "foraneas":[
-		   {"name":"id_ov", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_OV"},
-		   {"name":"id_tb", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_TB"}
+		   {"name":"id_vj", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_viaje", "table":"vj"},
+		   {"name":"id_dn", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_dinero", "table":"dn"}
 		],
-	   "unique":"id_ovTb",
+	   "unique":"id_vjDn",
 	   "columnas": [
-	     	{ "name":"Monto", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
-			{ "name":"Razon", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
-			{ "name":"Gasto/ingreso", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
+	     	{ "name":"Monto", "tipo":"string", "alias":"Monto","sqlType":"varchar(50)", "clase":""},
+			{ "name":"Razon", "tipo":"string", "alias":"Razon","sqlType":"varchar(50)", "clase":""},
+			{ "name":"Gasto_ingreso", "tipo":"string", "alias":"Gasto_ingreso","sqlType":"varchar(50)", "clase":""},
 	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
-		]		
+		],
+		"tabs":[]		
 	},
 	{
 	   "titulo": "Orden de Viaje-Vehiculo",
 	   "autor": "fmoreno",
 	   "plugin":"transportes-plugin",
 	   "schema":"tran",
-	   "tableName":"OvVh",
-	   "indice":{"name":"id_ovVh", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
+	   "tableName":"vjVh",
+	   "indice":{"name":"id_vjVh", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "foraneas":[
-		   {"name":"id_ov", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_OV"},
-		   {"name":"id_vh", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_VH"}
+		   {"name":"id_vj", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_viaje", "table":"vj"},
+		   {"name":"id_vh", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_vehiculo", "table":"vh"}
 		],
-	   "unique":"id_ovTb",
+	   "unique":"id_vjVh",
 	   "columnas": [
 	     	{ "name":"Monto", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 			{ "name":"Razon", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
-			{ "name":"Gasto/ingreso", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
+			{ "name":"Gasto_ingreso", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
-		]		
+		],
+		"tabs":[]		
 	},
 	{
 	   "titulo": "Orden de Viaje-Trabajadores",
 	   "autor": "fmoreno",
 	   "plugin":"transportes-plugin",
 	   "schema":"tran",
-	   "tableName":"OvTb",
-	   "indice":{"name":"id_ovTb", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
+	   "tableName":"vjTb",
+	   "indice":{"name":"id_vjTb", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "foraneas":[
-		   {"name":"id_ov", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_OV"},
-		   {"name":"id_tb", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_TB"}
+		   {"name":"id_vj", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_VJ","table":"vj"},
+		   {"name":"id_tb", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_TB","table":"tb"}
 		],
 	   "unique":"id_ovTb",
 	   "columnas": [
 	     	{ "name":"Monto", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 			{ "name":"Razon", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
-			{ "name":"Gasto/ingreso", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
+			{ "name":"Gasto_ingreso", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
-		]		
+		],
+		"tabs":[]		
 	},
 	{
 	   "titulo": "Orden de Transporte - Ruta",
 	   "autor": "fmoreno",
 	   "plugin":"transportes-plugin",
 	   "schema":"tran",
-	   "tableName":"OtRt",
+	   "tableName":"otRt",
 	   "indice":{"name":"id_otRt", "tipo":"int","sqlType":"varchar(3)", "alias":"ID" },
 	   "foraneas":[
-		   {"name":"id_ot", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_OT"},
-		   {"name":"id_rt", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_RT"}
+		   {"name":"id_ot", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_OrdenTrans", "table":"ot"},
+		   {"name":"id_rt", "tipo":"int","sqlType":"varchar(3)", "alias":"ID_ruta", "table":"rt"}
 		],
 	   "unique":"id_otRt",
 	   "columnas": [
 	     	{ "name":"Monto", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 			{ "name":"Razon", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
-			{ "name":"Gasto/ingreso", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
+			{ "name":"Gasto_ingreso", "tipo":"string", "alias":"empresa","sqlType":"varchar(50)", "clase":""},
 	        { "name":"fecha", "tipo":"datetime", "alias":"fecha","sqlType":"varchar(50)", "clase":"datetime"}       
-		]		
+		],
+		"tabs":[]		
 	}
 ]
 }
