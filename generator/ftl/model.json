@@ -1,60 +1,6 @@
 {
 "tablas":[
 	{
-	   "titulo": "Orden de Transporte",
-	   "autor": "fmoreno",
-	   "plugin":"transportes-plugin",
-	   "schema":"tran",
-	   "tableName":"ot",
-	   "indice":{"name":"id_ot",  "alias":"ID" },
-	   "unique":"id_ot",
-	   "foraneas":[],
-	   "columnas": [
-			{ "name":"rutEmpOrig",  "alias":"Rut Empresa Origen", "clase":"rut"},
-			{ "name":"nomEmporig",  "alias":"Nombre Empresa Origen", "clase":""},
-	        { "name":"telEmpOrig",  "alias":"Telefono Origen", "clase":"int"},
-			{ "name":"id_rt",  		"alias":"Ruta", "clase":"combobox", "table":"rt"},
-			{ "name":"dirEmpOrig",  "alias":"Direccion Origen", "clase":""},
-			{ "name":"ciudEmpOrig",  "alias":"Ciudad Origen", "clase":""},
-			{ "name":"nomPerOrig",  "alias":"Persona que Entrega ", "clase":""},
-			{ "name":"fechaOrig",  "alias":"Fecha Entrega", "clase":"datetime"},
-			{ "name":"rutEmpDest",  "alias":"Rut Empresa Destino", "clase":""},
-			{ "name":"nomEmpDest",  "alias":"Nombre Empresa Destino", "clase":""},
-	        { "name":"telEmpDest",  "alias":"Telefono Destino", "clase":""},
-			{ "name":"dirEmpDest",  "alias":"Direccion Destino", "clase":""},
-			{ "name":"ciudEmpDest",  "alias":"Ciudad Destino", "clase":""},
-			{ "name":"nomPerDest",  "alias":"Persona que Retira", "clase":""},
-			{ "name":"fechaDest",  "alias":"Fecha Entrega", "clase":"datetime"},
-			{ "name":"formaPago",  "alias":"Forma de Pago", "clase":""},
-			{ "name":"cuentaCte",  "alias":"Cuenta Corriente", "clase":""},
-			{ "name":"boletaFactura",  "alias":"Boleta/Factura", "clase":"radio", "opcion":["Boleta","Factura"]},
-			{ "name":"nroPiezas",  "alias":"N° de Piezas", "clase":"int"},
-			{ "name":"pesoCarga",  "alias":"Peso(Kg)", "clase":"int"},
-			{ "name":"largoCarga",  "alias":"Largo(m)", "clase":"int"},
-			{ "name":"anchoCarga",  "alias":"Ancho(m)", "clase":"int"},
-			{ "name":"altoCarga",  "alias":"Alto(m)", "clase":"int"},
-			{ "name":"documentos",  "alias":"Documentos asociados", "clase":""},
-			{ "name":"instrucciones",  "alias":"Instrucciones", "clase":""}
-			
-		],
-		"tabs":[]
-	},
-		{
-	   "titulo": "Registro de Gastos",
-	   "autor": "fmoreno",
-	   "plugin":"transportes-plugin",
-	   "schema":"tran",
-	   "tableName":"rg",
-	   "indice":{"name":"id_rg",  "alias":"ID" },
-	   "unique":"id_rg",
-	   "foraneas":[],
-	   "columnas": [
-	     	{ "name":"nombreEmpresa",  "alias":"empresa", "clase":""},
-	        { "name":"fecha",  "alias":"fecha", "clase":"datetime"}       
-		],
-		"tabs":[]		
-	},
-	{
 	   "titulo": "Trabajadores",
 	   "autor": "fmoreno",
 	   "plugin":"transportes-plugin",
@@ -64,8 +10,10 @@
 	   "unique":"id_tb",
 	   "foraneas":[],
 	   "columnas": [
-	     	{ "name":"nombreEmpresa",  "alias":"empresa", "clase":""},
-	        { "name":"fecha",  "alias":"fecha", "clase":"datetime"}       
+	     	{ "name":"name",  "alias":"Código Trabajador", "clase":""},
+			{ "name":"rut",  "alias":"Rut Trabajador", "clase":"rut"},
+	        { "name":"fechaIng",  "alias":"Fecha Ingreso", "clase":"fecha"},       
+			{ "name":"cargo",  "alias":"Cargo", "clase":"radio", "opcion":["Chofer","Pioneta"]}       
 		],
 		"tabs":[]
 	},
@@ -79,8 +27,27 @@
 	   "unique":"id_vh",
 	   "foraneas":[],
 	   "columnas": [
-	     	{ "name":"nombreEmpresa",  "alias":"empresa", "clase":""},
-	        { "name":"fecha",  "alias":"fecha", "clase":"datetime"}       
+	     	{ "name":"name",  "alias":"Código Vehiculo", "clase":""},
+	        { "name":"tipo",  "alias":"tipo", "clase":"radio", "opcion":["FURGON","CAMION", "REMOLQUE", "SEMIREMOLQUE", "TRACTO"]},
+			{ "name":"Tonelaje",  "alias":"Tonelaje", "clase":"numero"},
+			{ "name":"Patente",  "alias":"Patente", "clase":""},
+			{ "name":"Marca",  "alias":"Marca", "clase":""},
+			{ "name":"Modelo",  "alias":"Modelo", "clase":""},
+			{ "name":"Año",  "alias":"Año", "clase":""},
+			{ "name":"FechaCompra",  "alias":"Fecha Compra", "clase":"fecha"},
+			{ "name":"estanque",  "alias":"Código Vehiculo", "clase":"numero"},
+			{ "name":"zona",  "alias":"Zona de Servicio", "clase":"radio", "opcion":["Norte","Centro", "Sur"]},
+			{ "name":"rendimiento",  "alias":"Rendimiento (kms/lt)", "clase":"numero"},
+			{ "name":"fecUltMantencion",  "alias":"Fecha Ultima mantención", "clase":"fecha"},
+			{ "name":"fecRevTecnica",  "alias":"Revisión Tecnica", "clase":"fecha"},
+			{ "name":"fecGases",  "alias":"Control de Gases", "clase":"fecha"},
+			{ "name":"fecPermCirculacion",  "alias":"Permiso Circulación", "clase":"fecha"},
+			{ "name":"fecCambioAceite",  "alias":"Último Cambio de Aceite", "clase":"fecha"},
+			{ "name":"fecCambioFiltro",  "alias":"Cambio Filtro", "clase":"fecha"},
+			{ "name":"neumaticoRepuesto",  "alias":"Neumático Repuesto", "clase":"radio", "opcion":["Si","No"]},
+			{ "name":"herramientas",  "alias":"Herramientas", "clase":"radio", "opcion":["Si","No"]},
+			{ "name":"chalecoReflectante",  "alias":"Chaleco Reflectante", "clase":"radio", "opcion":["Si","No"]}
+
 		],
 		"tabs":[]		
 	},
@@ -95,13 +62,13 @@
 	   "foraneas":[],
 	   "columnas": [
 	     	{ "name":"name_rt",  	 "alias":"Nombre Ruta", "clase":""},
-	        { "name":"ciudad_orig",  "alias":"Ciudad Origen", "clase":""},
-	        { "name":"comuna_orig",  "alias":"Comuna Origen", "clase":""},
-	        { "name":"ciudad_dest",  "alias":"Ciudad Destino", "clase":""},
-	        { "name":"comuna_orig",  "alias":"Comuna Destino", "clase":""},
-	        { "name":"kms",  "alias":"Kms Aprox.", "clase":"int"},
-	        { "name":"precioBase",  "alias":"Precio", "clase":"int"},
-			{ "name":"precioExtencion",  "alias":"Precio Extención", "clase":"int"}
+	        { "name":"ciudad_orig",  "alias":"Ciudad Origen", "clase":"combobox", "tabla":"ciudad"},
+	        { "name":"comuna_orig",  "alias":"Comuna Origen", "clase":"combobox", "tabla":"comuna"},
+	        { "name":"ciudad_dest",  "alias":"Ciudad Destino", "clase":"combobox", "tabla":"ciudad"},
+	        { "name":"comuna_orig",  "alias":"Comuna Destino", "clase":"combobox", "tabla":"comuna"},
+	        { "name":"kms",  "alias":"Kms Aprox.", "clase":"numero"},
+	        { "name":"precioBase",  "alias":"Precio", "clase":"numero"},
+			{ "name":"precioExtencion",  "alias":"Precio Extención", "clase":"numero"}
 		],
 		"tabs":[]		
 	},
@@ -116,9 +83,48 @@
 	   "foraneas":[],
 	   "columnas": [
 	     	{ "name":"nombreEmpresa",  "alias":"empresa", "clase":""},
-	        { "name":"fecha",  "alias":"fecha", "clase":"datetime"}       
+	        { "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
 		],
 		"tabs":[]		
+	},
+		{
+	   "titulo": "Orden de Transporte",
+	   "autor": "fmoreno",
+	   "plugin":"transportes-plugin",
+	   "schema":"tran",
+	   "tableName":"ot",
+	   "indice":{"name":"id_ot",  "alias":"ID" },
+	   "unique":"id_ot",
+	   "foraneas":[],
+	   "columnas": [
+			{ "name":"rutEmpOrig",  "alias":"Rut Empresa Origen", "clase":"rut"},
+			{ "name":"nomEmporig",  "alias":"Nombre Empresa Origen", "clase":""},
+	        { "name":"telEmpOrig",  "alias":"Telefono Origen", "clase":"numero"},
+			{ "name":"id_rt",  		"alias":"Ruta", "clase":"combobox", "table":"rt"},
+			{ "name":"dirEmpOrig",  "alias":"Direccion Origen", "clase":""},
+			{ "name":"ciudEmpOrig",  "alias":"Ciudad Origen", "clase":""},
+			{ "name":"nomPerOrig",  "alias":"Persona que Entrega ", "clase":""},
+			{ "name":"fechaOrig",  "alias":"Fecha Entrega", "clase":"fecha"},
+			{ "name":"rutEmpDest",  "alias":"Rut Empresa Destino", "clase":""},
+			{ "name":"nomEmpDest",  "alias":"Nombre Empresa Destino", "clase":""},
+	        { "name":"telEmpDest",  "alias":"Telefono Destino", "clase":""},
+			{ "name":"dirEmpDest",  "alias":"Direccion Destino", "clase":""},
+			{ "name":"ciudEmpDest",  "alias":"Ciudad Destino", "clase":""},
+			{ "name":"nomPerDest",  "alias":"Persona que Retira", "clase":""},
+			{ "name":"fechaDest",  "alias":"Fecha Entrega", "clase":"fecha"},
+			{ "name":"formaPago",  "alias":"Forma de Pago", "clase":""},
+			{ "name":"cuentaCte",  "alias":"Cuenta Corriente", "clase":""},
+			{ "name":"boletaFactura",  "alias":"Boleta/Factura", "clase":"radio", "opcion":["Boleta","Factura"]},
+			{ "name":"nroPiezas",  "alias":"N° de Piezas", "clase":"numero"},
+			{ "name":"pesoCarga",  "alias":"Peso(Kg)", "clase":"numero"},
+			{ "name":"largoCarga",  "alias":"Largo(m)", "clase":"numero"},
+			{ "name":"anchoCarga",  "alias":"Ancho(m)", "clase":"numero"},
+			{ "name":"altoCarga",  "alias":"Alto(m)", "clase":"numero"},
+			{ "name":"documentos",  "alias":"Documentos asociados", "clase":""},
+			{ "name":"instrucciones",  "alias":"Instrucciones", "clase":""}
+			
+		],
+		"tabs":[]
 	},
 	{
 	   "titulo": "Orden de Viaje",
@@ -131,7 +137,7 @@
 	   "foraneas":[],
 	   "columnas": [
 	     	{ "name":"nombreEmpresa",  "alias":"empresa", "clase":""},
-	        { "name":"fecha",  "alias":"fecha", "clase":"datetime"}       
+	        { "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
 		],
 		"tabs":[
 			{"name":"dnTab", "fun":"tran_vjDn_list($id_vj)", "titulo":"Dineros" },
@@ -156,7 +162,7 @@
 	     	{ "name":"Monto",  "alias":"Monto", "clase":""},
 			{ "name":"Razon",  "alias":"Razon", "clase":""},
 			{ "name":"Gasto_ingreso",  "alias":"Gasto_ingreso", "clase":""},
-	        { "name":"fecha",  "alias":"fecha", "clase":"datetime"}       
+	        { "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
 		],
 		"tabs":[]		
 	},
@@ -176,7 +182,7 @@
 	     	{ "name":"Monto",  "alias":"empresa", "clase":""},
 			{ "name":"Razon",  "alias":"empresa", "clase":""},
 			{ "name":"Gasto_ingreso",  "alias":"empresa", "clase":""},
-	        { "name":"fecha",  "alias":"fecha", "clase":"datetime"}       
+	        { "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
 		],
 		"tabs":[]		
 	},
@@ -196,7 +202,7 @@
 	     	{ "name":"Monto",  "alias":"empresa", "clase":""},
 			{ "name":"Razon",  "alias":"empresa", "clase":""},
 			{ "name":"Gasto_ingreso",  "alias":"empresa", "clase":""},
-	        { "name":"fecha",  "alias":"fecha", "clase":"datetime"}       
+	        { "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
 		],
 		"tabs":[]		
 	},
@@ -216,7 +222,7 @@
 	     	{ "name":"Monto",  "alias":"empresa", "clase":""},
 			{ "name":"Razon",  "alias":"empresa", "clase":""},
 			{ "name":"Gasto_ingreso",  "alias":"empresa", "clase":""},
-	        { "name":"fecha",  "alias":"fecha", "clase":"datetime"}       
+	        { "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
 		],
 		"tabs":[]		
 	}

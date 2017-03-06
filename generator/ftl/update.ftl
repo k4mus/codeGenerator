@@ -136,12 +136,12 @@ function ${schema}_${tableName}_update() {
 			
     </div>
     <script>
-		$( ".datetime" ).datepicker();
+		$( ".fecha" ).datepicker();
 		$( "#tabs" ).tabs();
 		$('.combobox').each( function( index, element ){
 			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
 		});
-		$( ".int" ).spinner();
+		$( ".numero" ).spinner();
 		
 	</script>
     <?php

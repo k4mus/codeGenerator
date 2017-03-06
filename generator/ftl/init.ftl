@@ -23,10 +23,10 @@ function ${tableName}_options_install() {
 			</#list>
 			<#list columnas as col>
             	<#switch col.clase>
-				<#case "datetime"> 
+				<#case "fecha"> 
 				`${col.name}` varchar(11) CHARACTER SET utf8 NOT NULL ,
 				<#break>
-				<#case "int">
+				<#case "numero">
 				`${col.name}` MEDIUMINT,
 				<#break>
 				<#case "combobox">

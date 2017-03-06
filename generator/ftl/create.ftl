@@ -110,8 +110,8 @@ function ${schema}_${tableName}_create() {
 	</#list>
 	
     <script>
-		$( ".datetime" ).datepicker();
-		$( ".int" ).spinner();
+		$( ".fecha" ).datepicker();
+		$( ".numero" ).spinner();
 		$("#tabs" ).tabs();
 		
 	</script>
