@@ -97,6 +97,8 @@ function ${schema}_${tableName}_update() {
 					</tr>
 					</#list>
                     
+					<#list columnas as col> 
+					<#switch col.clase>
 						<#case "combobox">
 					<td><select type="text" id= "${col.name}" name="${col.name}" value="<?php echo $${col.name}; ?>  " class="${col.clase}">
 						<option value="">Select one...</option>

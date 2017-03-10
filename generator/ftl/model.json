@@ -62,10 +62,10 @@
 	   "foraneas":[],
 	   "columnas": [
 	     	{ "name":"name_rt",  	 "alias":"Nombre Ruta", "clase":""},
-	        { "name":"ciudad_orig",  "alias":"Ciudad Origen", "clase":"combobox", "tabla":"ciudad"},
-	        { "name":"comuna_orig",  "alias":"Comuna Origen", "clase":"combobox", "tabla":"comuna"},
-	        { "name":"ciudad_dest",  "alias":"Ciudad Destino", "clase":"combobox", "tabla":"ciudad"},
-	        { "name":"comuna_orig",  "alias":"Comuna Destino", "clase":"combobox", "tabla":"comuna"},
+	        { "name":"ciudad_orig",  "alias":"Ciudad Origen", "clase":"combobox", "table":"ciudad"},
+	        { "name":"comuna_orig",  "alias":"Comuna Origen", "clase":"combobox", "table":"comuna"},
+	        { "name":"ciudad_dest",  "alias":"Ciudad Destino", "clase":"combobox", "table":"ciudad"},
+	        { "name":"comuna_orig",  "alias":"Comuna Destino", "clase":"combobox", "table":"comuna"},
 	        { "name":"kms",  "alias":"Kms Aprox.", "clase":"numero"},
 	        { "name":"precioBase",  "alias":"Precio", "clase":"numero"},
 			{ "name":"precioExtencion",  "alias":"Precio Extención", "clase":"numero"}
