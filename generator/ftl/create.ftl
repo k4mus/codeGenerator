@@ -102,12 +102,7 @@ function ${schema}_${tableName}_create() {
 		<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
     </div>
 	<#assign icont = 2/> 
-	<#list tabs as tab>	
-	<div id="tabs-${icont}">
-		<?php	${tab.fun};?>
-	</div>
-	<#assign icont = icont+1/> 
-	</#list>
+	
 	
     <script>
 		$( ".fecha" ).datepicker();

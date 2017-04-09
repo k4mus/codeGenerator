@@ -44,7 +44,7 @@ public class FreeMarkerRunner{
 			String templateName = args[1];
 			String modelName =  args[2];
 			String tipo= args[3];
-			String outputPath;
+			String outputPath = null;
 			System.out.println("Argumentos: rutaFTL, plantilla, modelo, tipo");
 			System.out.println("Argumentos: "+pahtFTL+","+templateName+","+modelName+","+tipo);
 			if (pahtFTL.isEmpty() || templateName.isEmpty() || modelName.isEmpty() || tipo.isEmpty()){
@@ -56,15 +56,15 @@ public class FreeMarkerRunner{
 			//Load Model on Jason
 			JSONObject obj = (JSONObject) parser.parse(new FileReader(modelName));
 			ArrayList jsonMapTablas= (ArrayList) jsonToMap(obj).get("tablas");
-			
+			String dirPath="";
+			Map demo = null;
 			for (int i =0; i<jsonMapTablas.size();i++){
-				Map demo = (Map) jsonMapTablas.get(i);
-				String dirPath= demo.get("schema").toString()+"\\"+demo.get("tableName").toString();
+				demo = (Map) jsonMapTablas.get(i);
+				dirPath= demo.get("schema").toString()+"\\"+demo.get("tableName").toString();
 				File dir = new File(dirPath);
 			    if (!dir.exists())dir.mkdirs();
 			    
-				outputPath= dirPath+"/"+demo.get("schema")+"_"+demo.get("tableName")+"_"+tipo;
-	            
+			    outputPath= dirPath+"/"+demo.get("schema")+"_"+demo.get("tableName")+"_"+tipo;
 	            // File output
 				Writer file = new FileWriter(new File(outputPath));
 				//Freemarker union model-template
@@ -72,11 +72,18 @@ public class FreeMarkerRunner{
 				file.flush();
 				file.close();
 				System.out.println("Codigo creado: "+ outputPath);
-				
-
 			}
-			
-//			JSONObject jsonObject = (JSONObject) obj;
+			if (demo.get("schema")!=null && outputPath!=null && templateName.equalsIgnoreCase("init.ftl")){
+				template = cfg.getTemplate(pahtFTL+"/"+"init_0.ftl");
+				
+				outputPath=demo.get("schema").toString();
+				outputPath+="\\init.php";
+				Writer file = new FileWriter(new File(outputPath));
+				template.process( jsonToMap(obj), file);
+				file.flush();
+				file.close();
+			}
+			JSONObject jsonObject = (JSONObject) obj;
             //parse model to Map
 //            Map demo = jsonToMap(jsonObject);
             
