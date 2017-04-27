@@ -10,7 +10,7 @@
 	   "unique":"id_tb",
 	   "foraneas":[],
 	   "columnas": [
-	     	{ "name":"name",  "alias":"C贸digo Trabajador", "clase":""},
+	     	{ "name":"name_tb",  "alias":"C贸digo Trabajador", "clase":""},
 			{ "name":"rut",  "alias":"Rut Trabajador", "clase":"rut"},
 	        { "name":"fechaIng",  "alias":"Fecha Ingreso", "clase":"fecha"},       
 			{ "name":"cargo",  "alias":"Cargo", "clase":"radio", "opcion":["Chofer","Pioneta"]}       
@@ -27,7 +27,7 @@
 	   "unique":"id_vh",
 	   "foraneas":[],
 	   "columnas": [
-	     	{ "name":"name",  "alias":"C贸digo Vehiculo", "clase":""},
+	     	{ "name":"name_vh",  "alias":"C贸digo Vehiculo", "clase":""},
 	        { "name":"tipo",  "alias":"tipo", "clase":"radio", "opcion":["FURGON","CAMION", "REMOLQUE", "SEMIREMOLQUE", "TRACTO"]},
 			{ "name":"Tonelaje",  "alias":"Tonelaje", "clase":"numero"},
 			{ "name":"Patente",  "alias":"Patente", "clase":""},
@@ -62,9 +62,9 @@
 	   "foraneas":[],
 	   "columnas": [
 	     	{ "name":"name_rt",  	 "alias":"Nombre Ruta", "clase":""},
-	        { "name":"ciudad_orig",  "alias":"Ciudad Origen", "clase":"combobox", "table":"ciudad"},
+	        { "name":"ciudad_orig",  "alias":"Provincia Origen", "clase":"combobox", "table":"ciudad"},
 	        { "name":"comuna_orig",  "alias":"Comuna Origen", "clase":"combobox", "table":"comuna"},
-	        { "name":"ciudad_dest",  "alias":"Ciudad Destino", "clase":"combobox", "table":"ciudad"},
+	        { "name":"ciudad_dest",  "alias":"Provincia Destino", "clase":"combobox", "table":"ciudad"},
 	        { "name":"comuna_orig",  "alias":"Comuna Destino", "clase":"combobox", "table":"comuna"},
 	        { "name":"kms",  "alias":"Kms Aprox.", "clase":"numero"},
 	        { "name":"precioBase",  "alias":"Precio", "clase":"numero"},
@@ -82,9 +82,9 @@
 	   "unique":"id_dn",
 	   "foraneas":[],
 	   "columnas": [
-	     	{ "name":"nombreEmpresa",  "alias":"empresa", "clase":""},
-	        { "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
-		],
+	     	{ "name":"name_dn",  "alias":"Concepto", "clase":""},
+	        { "name":"signo",  "alias":"gasto/ingreso", "clase":"radio", "opcion":["1","-1"] } 
+	    ],
 		"tabs":[]		
 	},
 		{
@@ -97,6 +97,7 @@
 	   "unique":"id_ot",
 	   "foraneas":[],
 	   "columnas": [
+	   		{ "name":"name_ot",  "alias":"Codigo OT", "clase":"t"},
 			{ "name":"rutEmpOrig",  "alias":"Rut Empresa Origen", "clase":"rut"},
 			{ "name":"nomEmporig",  "alias":"Nombre Empresa Origen", "clase":""},
 	        { "name":"telEmpOrig",  "alias":"Telefono Origen", "clase":"numero"},
@@ -136,7 +137,8 @@
 	   "unique":"id_vj",
 	   "foraneas":[],
 	   "columnas": [
-	     	{ "name":"nombreEmpresa",  "alias":"empresa", "clase":""},
+	     	{ "name":"name_vj",  "alias":"codVIaje", "clase":""},
+	        { "name":"nombreEmpresa",  "alias":"empresa", "clase":""},
 	        { "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
 		],
 		"tabs":[
@@ -154,15 +156,14 @@
 	   "tableName":"vjDn",
 	   "indice":{"name":"id_vjDn",  "alias":"ID" },
 	   "foraneas":[
-		   {"name":"id_vj",  "alias":"ID_viaje", "table":"vj"},
-		   {"name":"id_dn",  "alias":"ID_dinero", "table":"dn"}
+		   {"name":"id_vj",  "alias":"viaje", "table":"vj"},
+		   {"name":"id_dn",  "alias":"dinero", "table":"dn"}
 		],
 	   "unique":"id_vjDn",
 	   "columnas": [
-	     	{ "name":"Monto",  "alias":"Monto", "clase":""},
+	     	{ "name":"Monto",  "alias":"Monto", "clase":"numero"},
 			{ "name":"Razon",  "alias":"Razon", "clase":""},
-			{ "name":"Gasto_ingreso",  "alias":"Gasto_ingreso", "clase":""},
-	        { "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
+			{ "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
 		],
 		"tabs":[]		
 	},
@@ -179,10 +180,10 @@
 		],
 	   "unique":"id_vjVh",
 	   "columnas": [
-	     	{ "name":"Monto",  "alias":"empresa", "clase":""},
-			{ "name":"Razon",  "alias":"empresa", "clase":""},
-			{ "name":"Gasto_ingreso",  "alias":"empresa", "clase":""},
-	        { "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
+	     	{ "name":"km",  "alias":"Kilomentros al inicio", "clase":""},
+			{ "name":"fecha",  "alias":"fecha", "clase":"fecha"},
+			{ "name":"estanque",  "alias":"Estanque", "clase":"radio" ,"opcion":["1/4","1/2","3/4","lleno"]},
+			{ "name":"obvservacion",  "alias":"Obvservaci髇", "clase":""}	               
 		],
 		"tabs":[]		
 	},
@@ -199,7 +200,7 @@
 		],
 	   "unique":"id_vjTb",
 	   "columnas": [
-	     	{ "name":"Monto",  "alias":"empresa", "clase":""},
+	     	{ "name":"Rol",  "alias":"empresa", "clase":""},
 			{ "name":"Razon",  "alias":"empresa", "clase":""},
 			{ "name":"Gasto_ingreso",  "alias":"empresa", "clase":""},
 	        { "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
@@ -219,9 +220,9 @@
 		],
 	   "unique":"id_otRt",
 	   "columnas": [
-	     	{ "name":"Monto",  "alias":"empresa", "clase":""},
-			{ "name":"Razon",  "alias":"empresa", "clase":""},
-			{ "name":"Gasto_ingreso",  "alias":"empresa", "clase":""},
+	     	{ "name":"Monto",  "alias":"Monto", "clase":""},
+			{ "name":"Razon",  "alias":"Razon", "clase":""},
+			{ "name":"Gasto_ingreso",  "alias":"Gasto", "clase":""},
 	        { "name":"fecha",  "alias":"fecha", "clase":"fecha"}       
 		],
 		"tabs":[]		

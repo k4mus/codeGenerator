@@ -2,9 +2,10 @@
 error_reporting(0);
 function ${schema}_${tableName}_list(<#list foraneas as for>$${for.name}<#if for_has_next>,</#if></#list>) {
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/${plugin}/style-admin.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.css"/>
  	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/${plugin}/style-admin.css" rel="stylesheet" />
+    
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
@@ -19,13 +20,13 @@ function ${schema}_${tableName}_list(<#list foraneas as for>$${for.name}<#if for
         </div>
         <?php
         global $wpdb;
-        $table_name = $wpdb->prefix . "${tableName}";
+        $table_name = $wpdb->prefix ."${tableName}";
 		
 		<#list foraneas as for>
 		$i${for.name}=$${for.name};
-		if(!$i${for.name})$i${for.name}="${for.name}";	
+		if(!$i${for.name})$i${for.name}=$table_name .".${for.name}";	
 		</#list>
-        $rows = $wpdb->get_results("SELECT ${indice.name},<#list foraneas as for>${for. name},</#list> <#list columnas as col> ${col.name} <#if col_has_next>,</#if></#list> from $table_name <#if foraneas?has_content > where</#if> <#list foraneas as for> ${for.name}=$i${for.name} <#if for_has_next> AND </#if>  </#list> ");
+        $rows = $wpdb->get_results("SELECT ${indice.name},<#list foraneas as for> " .$wpdb->prefix ."${for.table}.name_${for.table},</#list> <#list columnas as col>$table_name.${col.name} <#if col_has_next>,</#if></#list> from $table_name <#if foraneas?has_content > <#list foraneas as for> left join " .$wpdb->prefix ."${for.table} on " .$wpdb->prefix ."${for.table}.${for.name} = $table_name.${for.name}   </#list> where</#if> <#list foraneas as for> $table_name.${for.name}=$i${for.name} <#if for_has_next> AND </#if>  </#list> ");
         ?>
         <table id ="table_${tableName}" $table_name class='wp-list-table widefat fixed striped posts'>
             <thead>
@@ -51,7 +52,7 @@ function ${schema}_${tableName}_list(<#list foraneas as for>$${for.name}<#if for
 					<?php
 					<#list foraneas as for>
 					if (!$${for.name}) 
-						echo "<td class='manage-column ss-list-width'>" .$row->${for.name} ."</td>"; 
+						echo "<td class='manage-column ss-list-width'>" .$row->name_${for.table} ."</td>"; 
 					</#list>
 					?>
 					<#list columnas as col>

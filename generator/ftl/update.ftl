@@ -26,6 +26,9 @@ function ${schema}_${tableName}_update() {
 	</#switch>
 	</#list>
 	
+	<#list foraneas as for>
+	$rows_${for.table} = $wpdb->get_results("SELECT id_${for.table}, name_${for.table} from ".$wpdb->prefix ."${for.table}");  
+	</#list>
 //update
     if (isset($_POST['update'])){
 		<#list foraneas as for>
@@ -44,7 +47,7 @@ function ${schema}_${tableName}_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE ${indice.name} = %s", $${indice.name}));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT ${indice.name} <#list foraneas as for> ,'${for.name}' </#list>,<#list columnas as col> ${col.name} <#if col_has_next>,</#if></#list> from $table_name where ${indice.name}=%s", $${indice.name}));
+        $results = $wpdb->get_results($wpdb->prepare("SELECT ${indice.name} <#list foraneas as for> ,${for.name} </#list>,<#list columnas as col> ${col.name} <#if col_has_next>,</#if></#list> from $table_name where ${indice.name}=%s", $${indice.name}));
         foreach ($results as $r) {
             $${indice.name} = $r->${indice.name};
             <#list foraneas as for> 
@@ -56,13 +59,14 @@ function ${schema}_${tableName}_update() {
         }
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/${plugin}/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/css/ui.jqgrid.min.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/${plugin}/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.13.6/js/jquery.jqgrid.min.js"></script>
-	<script src="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/js/combobox.js"></script>
+	<script src="<?php echo WP_PLUGIN_URL; ?>/${plugin}/js/combobox.js"></script>
     <div class="wrap">
         <h2></h2>
 
@@ -93,7 +97,13 @@ function ${schema}_${tableName}_update() {
 					<#list foraneas as for>
 					<tr>
 						<th>${for.alias}</th>
-						<td><input type="text" name="${for.name}" value="<?php echo $${for.name}; ?>"  <?php if ($${for.name}) echo readonly  ?> /></td>
+						<td><select type="text" id= "${for.name}" name="${for.name}" value="<?php echo $${for.name}; ?>" <?php if ($${for.name}) echo readonly  ?> class="combobox">
+							<option value="">Select one...</option>
+							<?php foreach ($rows_${for.table} as $row_${for.table}) { ?>
+							<option value="<?php echo $row_${for.table}->id_${for.table}; ?>"><?php if ($${for.name})echo $row_${for.table}->name_${for.table};  else $row_${for.table}->id_${for.table}; ?></option>
+							<?php } ?>
+							</select>
+						</td>
 					</tr>
 					</#list>
                     
@@ -104,7 +114,7 @@ function ${schema}_${tableName}_update() {
 					<td><select type="text" id= "${col.name}" name="${col.name}" value="<?php echo $${col.name}; ?>  " class="${col.clase}">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_${col.table} as $row_${col.table}) { ?>
-						<option value="<?php echo $row_${col.table}->id_${col.table}; ?>"><?php echo $row_${col.table}->name_${col.table}; ?></option>
+						<option value="<?php echo $row_${col.table}->id_${col.table}; ?>"><?php if ($${col.name})echo $row_${col.table}->name_${col.table};  else $row_${col.table}->id_${col.table}; ?></option>
 						<?php } ?>
 						</select>
 					</td>

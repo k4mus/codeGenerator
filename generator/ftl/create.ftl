@@ -16,7 +16,10 @@ function ${schema}_${tableName}_create() {
 	$page_volver= "${schema}_${tableName}_list";
 	 //insert
 	global $wpdb;
-	
+	<#list foraneas as for>
+	$rows_${for.table} = $wpdb->get_results("SELECT id_${for.table}, name_${for.table} from ".$wpdb->prefix ."${for.table}");  
+	</#list>
+    
 	<#list columnas as col> 
 	<#switch col.clase>
 	  <#case "combobox">
@@ -42,11 +45,12 @@ function ${schema}_${tableName}_create() {
 		$message.="${titulo} inserted: ".$id_${tableName};
     }
     ?>
-    <link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/${plugin}/style-admin.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+	<link type="text/css" href="<?php echo WP_PLUGIN_URL; ?>/${plugin}/style-admin.css" rel="stylesheet" />
 	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="<?php echo WP_PLUGIN_URL; ?>/transportes-plugin/js/combobox.js"></script>
+	<script src="<?php echo WP_PLUGIN_URL; ?>/${plugin}/js/combobox.js"></script>
     
     <div class="wrap">
         <h2>Add New ${titulo}</h2>
@@ -66,7 +70,13 @@ function ${schema}_${tableName}_create() {
 				<#list foraneas as for>
 				<tr>
                     <th class="ss-th-width">${for.alias}</th>
-                    <td><input type="text" name="${for.name}" value="<?php echo $${for.name}; ?>" <?php if ($${for.name}) echo readonly  ?> class="ss-field-width " /></td>
+                    <td><select type="text" id= "${for.name}" name="${for.name}" value="<?php echo $${for.name}; ?>" <?php if ($${for.name}) echo readonly  ?> class="combobox">
+						<option value="">Select one...</option>
+						<?php foreach ($rows_${for.table} as $row_${for.table}) { ?>
+						<option value="<?php echo $row_${for.table}->id_${for.table}; ?>"><?php if ( $row_${for.table}->name_${for.table})echo $row_${for.table}->name_${for.table};  else echo $row_${for.table}->id_${for.table}; ?></option>
+						<?php } ?>
+						</select>
+					</td>
                 </tr>
 				</#list>
 				<#list columnas as col>
@@ -77,7 +87,7 @@ function ${schema}_${tableName}_create() {
 					<td><select type="text" id= "${col.name}" name="${col.name}" value="<?php echo $${col.name}; ?>  " class="${col.clase}">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_${col.table} as $row_${col.table}) { ?>
-						<option value="<?php echo $row_${col.table}->id_${col.table}; ?>"><?php echo $row_${col.table}->name_${col.table}; ?></option>
+						<option value="<?php echo $row_${col.table}->id_${col.table}; ?>"><?php if ($${col.name})echo $row_${col.table}->name_${col.table};  else $row_${col.table}->id_${col.table}; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -108,6 +118,9 @@ function ${schema}_${tableName}_create() {
 		$( ".fecha" ).datepicker();
 		$( ".numero" ).spinner();
 		$("#tabs" ).tabs();
+		$('.combobox').each( function( index, element ){
+			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
+		});
 		
 	</script>
     <?php
