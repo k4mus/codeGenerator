@@ -61,7 +61,7 @@ function ${schema}_${tableName}_create() {
 		endif; ?>
 		<div id="tabs">
 		  <ul>
-			<li><a href="#tabs-1">Orden de Transporte</a></li>
+			<li><a href="#tabs-1">${titulo}</a></li>
 		  </ul>
 		<div id="tabs-1">
         <form method="post" action="<?php echo $_SERVER['REQUEST_URI']; ?>">
@@ -87,7 +87,7 @@ function ${schema}_${tableName}_create() {
 					<td><select type="text" id= "${col.name}" name="${col.name}" value="<?php echo $${col.name}; ?>  " class="${col.clase}">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_${col.table} as $row_${col.table}) { ?>
-						<option value="<?php echo $row_${col.table}->id_${col.table}; ?>"><?php if ($${col.name})echo $row_${col.table}->name_${col.table};  else $row_${col.table}->id_${col.table}; ?></option>
+						<option value="<?php echo $row_${col.table}->id_${col.table}; ?>"><?php if ($row_${col.table}->name_${col.table})echo $row_${col.table}->name_${col.table};  else echo $row_${col.table}->id_${col.table}; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -97,6 +97,16 @@ function ${schema}_${tableName}_create() {
 						<#list col.opcion as op>
 						<input type="radio" name="${col.name}" value="${op}"/>${op}
 						</#list>
+					</td>
+						<#break>
+						<#case "lista">
+					<td>
+						<select type="text" id= "${col.name}" name="${col.name}" value="<?php echo $${col.name}; ?>  " class="combobox">
+						<option value="">Select one...</option>
+						<#list col.opcion as op>
+						<option value="${op}">${op}</option>
+						</#list>
+						</select>	
 					</td>
 						<#break>
 						<#default>
@@ -112,16 +122,13 @@ function ${schema}_${tableName}_create() {
 		<a href="<?php echo admin_url('admin.php?page='.$page_volver) ?>">&laquo; Volver</a>
     </div>
 	<#assign icont = 2/> 
-	
-	
-    <script>
+	<script>
 		$( ".fecha" ).datepicker();
 		$( ".numero" ).spinner();
 		$("#tabs" ).tabs();
 		$('.combobox').each( function( index, element ){
 			$("option[value="+$(this).attr("value")+"]", this).attr('selected','selected');
 		});
-		
 	</script>
     <?php
 }

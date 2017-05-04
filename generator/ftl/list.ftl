@@ -26,7 +26,13 @@ function ${schema}_${tableName}_list(<#list foraneas as for>$${for.name}<#if for
 		$i${for.name}=$${for.name};
 		if(!$i${for.name})$i${for.name}=$table_name .".${for.name}";	
 		</#list>
-        $rows = $wpdb->get_results("SELECT ${indice.name},<#list foraneas as for> " .$wpdb->prefix ."${for.table}.name_${for.table},</#list> <#list columnas as col>$table_name.${col.name} <#if col_has_next>,</#if></#list> from $table_name <#if foraneas?has_content > <#list foraneas as for> left join " .$wpdb->prefix ."${for.table} on " .$wpdb->prefix ."${for.table}.${for.name} = $table_name.${for.name}   </#list> where</#if> <#list foraneas as for> $table_name.${for.name}=$i${for.name} <#if for_has_next> AND </#if>  </#list> ");
+        $rows = $wpdb->get_results("SELECT ${indice.name},
+		<#list foraneas as for> " .$wpdb->prefix ."${for.table}.name_${for.table},</#list> 
+		<#list columnas as col>$table_name.${col.name} <#if col_has_next>,</#if></#list> 
+		from $table_name 
+		<#if foraneas?has_content > <#list foraneas as for> left join " .$wpdb->prefix ."${for.table} on " .$wpdb->prefix ."${for.table}.${for.name} = $table_name.${for.name}   </#list> 
+		where</#if> <#list foraneas as for> $table_name.${for.name}=$i${for.name} <#if for_has_next> AND </#if> 
+		</#list> ");
         ?>
         <table id ="table_${tableName}" $table_name class='wp-list-table widefat fixed striped posts'>
             <thead>

@@ -13,7 +13,7 @@
 	     	{ "name":"name_tb",  "alias":"Código Trabajador", "clase":""},
 			{ "name":"rut",  "alias":"Rut Trabajador", "clase":"rut"},
 	        { "name":"fechaIng",  "alias":"Fecha Ingreso", "clase":"fecha"},       
-			{ "name":"cargo",  "alias":"Cargo", "clase":"radio", "opcion":["Chofer","Pioneta"]}       
+			{ "name":"cargo",  "alias":"Cargo", "clase":"lista", "opcion":["Chofer","Pioneta"]}       
 		],
 		"tabs":[]
 	},
@@ -28,7 +28,7 @@
 	   "foraneas":[],
 	   "columnas": [
 	     	{ "name":"name_vh",  "alias":"Código Vehiculo", "clase":""},
-	        { "name":"tipo",  "alias":"tipo", "clase":"radio", "opcion":["FURGON","CAMION", "REMOLQUE", "SEMIREMOLQUE", "TRACTO"]},
+	        { "name":"tipo",  "alias":"tipo", "clase":"lista", "opcion":["FURGON","CAMION", "REMOLQUE", "SEMIREMOLQUE", "TRACTO"]},
 			{ "name":"Tonelaje",  "alias":"Tonelaje", "clase":"numero"},
 			{ "name":"Patente",  "alias":"Patente", "clase":""},
 			{ "name":"Marca",  "alias":"Marca", "clase":""},

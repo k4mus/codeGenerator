@@ -47,7 +47,11 @@ function ${schema}_${tableName}_update() {
     else if (isset($_POST['delete'])) {
         $wpdb->query($wpdb->prepare("DELETE FROM $table_name WHERE ${indice.name} = %s", $${indice.name}));
     } else {//selecting value to update	
-        $results = $wpdb->get_results($wpdb->prepare("SELECT ${indice.name} <#list foraneas as for> ,${for.name} </#list>,<#list columnas as col> ${col.name} <#if col_has_next>,</#if></#list> from $table_name where ${indice.name}=%s", $${indice.name}));
+        $results = $wpdb->get_results($wpdb->prepare("
+		SELECT ${indice.name} 
+		<#list foraneas as for> ,${for.name} </#list>,
+		<#list columnas as col> ${col.name} <#if col_has_next>,</#if></#list>
+		from $table_name where ${indice.name}=%s", $${indice.name}));
         foreach ($results as $r) {
             $${indice.name} = $r->${indice.name};
             <#list foraneas as for> 
@@ -100,7 +104,7 @@ function ${schema}_${tableName}_update() {
 						<td><select type="text" id= "${for.name}" name="${for.name}" value="<?php echo $${for.name}; ?>" <?php if ($${for.name}) echo readonly  ?> class="combobox">
 							<option value="">Select one...</option>
 							<?php foreach ($rows_${for.table} as $row_${for.table}) { ?>
-							<option value="<?php echo $row_${for.table}->id_${for.table}; ?>"><?php if ($${for.name})echo $row_${for.table}->name_${for.table};  else $row_${for.table}->id_${for.table}; ?></option>
+							<option value="<?php echo $row_${for.table}->id_${for.table}; ?>"><?php if ($row_${for.table}->name_${for.table})echo $row_${for.table}->name_${for.table};  else echo $row_${for.table}->id_${for.table}; ?></option>
 							<?php } ?>
 							</select>
 						</td>
@@ -114,7 +118,7 @@ function ${schema}_${tableName}_update() {
 					<td><select type="text" id= "${col.name}" name="${col.name}" value="<?php echo $${col.name}; ?>  " class="${col.clase}">
 						<option value="">Select one...</option>
 						<?php foreach ($rows_${col.table} as $row_${col.table}) { ?>
-						<option value="<?php echo $row_${col.table}->id_${col.table}; ?>"><?php if ($${col.name})echo $row_${col.table}->name_${col.table};  else $row_${col.table}->id_${col.table}; ?></option>
+						<option value="<?php echo $row_${col.table}->id_${col.table}; ?>"><?php if ($row_${col.table}->name_${col.table})echo $row_${col.table}->name_${col.table};  else echo $row_${col.table}->id_${col.table}; ?></option>
 						<?php } ?>
 						</select>
 					</td>
@@ -124,6 +128,16 @@ function ${schema}_${tableName}_update() {
 						<#list col.opcion as op>
 						<input type="radio" name="${col.name}" value="${op}" <?php if ($${col.name}=="${op}") echo 'checked' ?> />${op}
 						</#list>
+					</td>
+						<#break>
+						<#case "lista">
+					<td>
+						<select type="text" id= "${col.name}" name="${col.name}" value="<?php echo $${col.name}; ?>  " class="combobox">
+						<option value="">Select one...</option>
+						<#list col.opcion as op>
+						<option value="${op}">${op}</option>
+						</#list>
+						</select>	
 					</td>
 						<#break>
 						<#default>
