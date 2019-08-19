@@ -9,7 +9,7 @@
     <target name="create_run_jar">
         <jar destfile="${dir.jarfile}/generator.jar" filesetmanifest="mergewithoutmain">
             <manifest>
-                <attribute name="Main-Class" value="com.enhance.FreeMarkerRunner"/>
+                <attribute name="Main-Class" value="com.coredevx.CodeGenerator"/>
                 <attribute name="Class-Path" value="."/>
             </manifest>
             <fileset dir="${dir.buildfile}/target/classes"/>

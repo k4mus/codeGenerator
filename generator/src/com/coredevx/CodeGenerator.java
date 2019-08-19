@@ -1,4 +1,4 @@
-package com.enhance;
+package com.coredevx;
 
 import java.io.File;
 import java.io.FileReader;
@@ -20,7 +20,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-public class FreeMarkerRunner{
+public class CodeGenerator{
 	
 	private static Configuration cfg = null;
 	
@@ -55,16 +55,17 @@ public class FreeMarkerRunner{
 			Template template = cfg.getTemplate(pahtFTL+"/"+templateName);
 			//Load Model on Jason
 			JSONObject obj = (JSONObject) parser.parse(new FileReader(modelName));
-			ArrayList jsonMapTablas= (ArrayList) jsonToMap(obj).get("tablas");
-			String dirPath="";
+			ArrayList jsonMapTablas= (ArrayList) jsonToMap(obj).get("projects");
+			String dirPath=obj.get("name").toString()+"/";
 			Map demo = null;
+			Writer fileOutput = new FileWriter(new File(obj.get("name").toString()+"/"+"output.txt"));
 			for (int i =0; i<jsonMapTablas.size();i++){
 				demo = (Map) jsonMapTablas.get(i);
-				dirPath= demo.get("schema").toString()+"\\"+demo.get("tableName").toString();
+				dirPath= obj.get("name").toString()+"/"+demo.get("name").toString();
 				File dir = new File(dirPath);
 			    if (!dir.exists())dir.mkdirs();
 			    
-			    outputPath= dirPath+"/"+demo.get("schema")+"_"+demo.get("tableName")+"_"+tipo;
+			    outputPath= dirPath+"/Jenkinsfile";
 	            // File output
 				Writer file = new FileWriter(new File(outputPath));
 				//Freemarker union model-template
@@ -72,17 +73,10 @@ public class FreeMarkerRunner{
 				file.flush();
 				file.close();
 				System.out.println("Codigo creado: "+ outputPath);
+				fileOutput.write(demo.get("name").toString()+","+demo.get("ssh_url_to_repo").toString()+",\n");
 			}
-			if (demo.get("schema")!=null && outputPath!=null && templateName.equalsIgnoreCase("init.ftl")){
-				template = cfg.getTemplate(pahtFTL+"/"+"init_0.ftl");
-				
-				outputPath=demo.get("schema").toString();
-				outputPath+="\\init.php";
-				Writer file = new FileWriter(new File(outputPath));
-				template.process( jsonToMap(obj), file);
-				file.flush();
-				file.close();
-			}
+			fileOutput.flush();
+			fileOutput.close();
 			JSONObject jsonObject = (JSONObject) obj;
             //parse model to Map
 //            Map demo = jsonToMap(jsonObject);
